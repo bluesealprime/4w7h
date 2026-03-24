@@ -1,19 +1,19 @@
 services:
-  - type: web
-    name: boogey-bot
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python main.py
-    envVars:
-      - key: TOKEN
-        sync: false
-      - key: PORT
-        value: 8080
-      - key: LAVALINK_HOST
-        value: lava-v4.ajieblogs.eu.org
-      - key: LAVALINK_PORT
-        value: 443
-      - key: LAVALINK_PASSWORD
-        value: https://dsc.gg/ajidevserver
-      - key: LAVALINK_SECURE
-        value: "True"
+- type: web
+  name: boogey-bot
+  env: python
+  buildCommand: pip install -r requirements.txt
+  startCommand: python main.py
+  envVars:
+  - key: TOKEN
+    sync: false
+  - key: PORT
+    value: 8080
+  - key: LAVALINK_HOST
+    value: lava-v4.ajieblogs.eu.org
+  - key: LAVALINK_PORT
+    value: 443
+  - key: LAVALINK_PASSWORD
+    value: https://dsc.gg/ajidevserver
+  - key: LAVALINK_SECURE
+    value: "True"
