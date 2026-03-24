@@ -87,19 +87,6 @@ class TicketBot(Yuna):
 
     async def setup_hook(self):
         """Initial startup operations and database sync"""
-        # Start Web Server for Render as early as possible
-        try:
-            app = web.Application()
-            app.router.add_get("/", self.handle_health)
-            runner = web.AppRunner(app)
-            await runner.setup()
-            port = int(os.environ.get("PORT", "8080"))
-            site = web.TCPSite(runner, '0.0.0.0', port)
-            await site.start()
-            logger.success("WEB", f"Health check server running on port {port}")
-        except Exception as e:
-            logger.error("WEB", f"Failed to start web server: {e}")
-
         logger.info("INIT", "Starting database synchronization...")
         try:
             # Sync global prefixes (utils/Tools.py)
@@ -305,6 +292,23 @@ async def start_bot_process():
         logger.error("INIT", "NO TOKEN DETECTED: Initialization aborted.")
         print("\n[!] Please fill in your TOKEN in the .env file to start the bot.")
         return
+
+    # Start Web Server for Render as early as possible
+    try:
+        app = web.Application()
+        # Add health check route
+        async def handle_health(request):
+            return web.Response(text="Bot is ALIVE and kicking!", status=200)
+        app.router.add_get("/", handle_health)
+        
+        runner = web.AppRunner(app)
+        await runner.setup()
+        port = int(os.environ.get("PORT", "8080"))
+        site = web.TCPSite(runner, '0.0.0.0', port)
+        await site.start()
+        logger.success("WEB", f"Health check server running on port {port}")
+    except Exception as e:
+        logger.error("WEB", f"Failed to start web server: {e}")
 
     try:
         print("[*] Bot connection initiated...")
