@@ -41,10 +41,14 @@ os.environ["JISHAKU_FORCE_PAGINATOR"] = "True"
 # Refresh environment variables
 # load_dotenv() - Moved to top
 
-# Logging setup (ensures logs directory exists)
-_log_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs')
-if not os.path.exists(_log_path):
-    os.makedirs(_log_path)
+# Logging setup (ensures logs and db directories exist)
+_root_path = os.path.dirname(os.path.abspath(__file__))
+for folder in ['logs', 'db', 'pfps']:
+    _path = os.path.join(_root_path, folder)
+    if not os.path.exists(_path):
+        os.makedirs(_path)
+
+_log_path = os.path.join(_root_path, 'logs')
 
 logging.basicConfig(
     level=logging.ERROR,

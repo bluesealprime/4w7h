@@ -122,8 +122,8 @@ class Logger:
             if error:
                 traceback.print_exception(type(error), error, error.__traceback__, file=f)
 
-        # Console logging - ONLY info and success
-        if level not in ['info', 'success']:
+        # Console logging - info, success, warn, error
+        if level not in ['info', 'success', 'warn', 'error']:
             return
 
         line = (
@@ -133,6 +133,8 @@ class Logger:
         )
 
         sys.stdout.write(line + "\n")
+        if error:
+            traceback.print_exception(type(error), error, error.__traceback__, file=sys.stdout)
         sys.stdout.flush()
 
     def info(self, *a): self._log('info', *a)
