@@ -24,7 +24,7 @@ extensions:List [str ]=[
 "cogs"
 ]
 
-class Yuna (commands.AutoShardedBot ):
+class Yuna (commands.Bot ):
 
     def __init__ (self,*arg,**kwargs ):
         intents =discord.Intents.all ()
@@ -43,8 +43,7 @@ class Yuna (commands.AutoShardedBot ):
         allowed_mentions =discord.AllowedMentions (
         everyone =False,replied_user =False,roles =False ),
         sync_commands_debug =True,
-        sync_commands =True,
-        shard_count =2 )
+        sync_commands =True)
 
 
         self.add_check (self.global_adminlock_check)
@@ -67,7 +66,7 @@ class Yuna (commands.AutoShardedBot ):
 
     async def set_streaming_status (self ):
         activity =discord.Streaming (
-            name ="4w7h | !help",
+            name ="acp.xz | !help",
             url ="https://bluesealbot-site.pages.dev/"
         )
         await self.change_presence (status =discord.Status.idle,activity =activity )

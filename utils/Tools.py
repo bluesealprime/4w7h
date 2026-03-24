@@ -259,3 +259,27 @@ def mark_error_handled (ctx ):
     """Mark error as handled"""
     command_key =(ctx.message.id,ctx.command.name )
     _handled_errors.add (command_key )
+
+def get_total_commands(bot):
+    """
+    Calculate the total number of unique commands and subcommands 
+    across all functional cogs.
+    """
+    # Cogs that don't provide user-facing commands or are internal
+    excluded_cogs = {
+        'Help', 'HelpSlash', 'Errors', 'Mention', 'AutoBlacklist', 
+        'AutoResponder', 'AutoRole', 'AutoReaction', 'AutoReactListener', 
+        'AIResponses', 'NotifCommands', 'Guild', 'StickyMessageListener',
+        'AutoBlacklist', 'AutoBlacklist', 'Jishaku', 'AutoRole', 'Autorole2', 'greet'
+    }
+    
+    total = 0
+    for cog_name, cog in bot.cogs.items():
+        if cog_name.lower() not in [ex.lower() for ex in excluded_cogs]:
+            # Walk through all commands including groups and subcommands
+            for cmd in cog.walk_commands():
+                # Count leaf commands (actual actions)
+                # Also count groups if they are executable on their own
+                if not isinstance(cmd, commands.Group) or (getattr(cmd, 'invoke_without_command', False)):
+                    total += 1
+    return total

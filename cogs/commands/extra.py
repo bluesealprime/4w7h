@@ -418,7 +418,7 @@ class Extra (commands.Cog ):
           f"**Name:** {dev_user.name}\n"
           f"**ID:** `{dev_id}`\n"
           f"**Role:** lead Developer & Founder\n"
-          f"**Team:** 4w7h Development"
+          f"**Team:** acp.xz Development"
       )
 
       if dev_user.avatar:
@@ -558,7 +558,7 @@ class Extra (commands.Cog ):
       view = ui.LayoutView()
       container = ui.Container(accent_color=None)
 
-      container.add_item(ui.TextDisplay("# ⏰ 4w7h Uptime"))
+      container.add_item(ui.TextDisplay("# ⏰ acp.xz Uptime"))
       container.add_item(ui.Separator())
 
       uptime_info = f"<:icon_danger:1373170993236803688> **UTC:** {uptime_string}\n\n<:icon_ping:1373948868114513972> **Online Duration:** {uptime_duration_string}"

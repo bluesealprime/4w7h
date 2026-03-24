@@ -520,7 +520,7 @@ class General(commands.Cog):
         view.add_item(container)
         await ctx.send (view=view)
 
-    @commands.command (name ="users",help ="checks total users of 4w7h-bot.")
+    @commands.command (name ="users",help ="checks total users of acp.xz-bot.")
     @blacklist_check ()
     @ignore_check ()
     @commands.cooldown (1,3,commands.BucketType.user )

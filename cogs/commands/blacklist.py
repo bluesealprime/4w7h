@@ -156,7 +156,7 @@ class Blacklist (commands.Cog ):
 
     @commands.Cog.listener ()
     async def on_message (self,message ):
-        if message.author.bot:
+        if message.author.bot or not message.guild:
             return 
 
         guild_id =str (message.guild.id )

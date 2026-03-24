@@ -12,6 +12,7 @@ import json
 from utils import Paginator,DescriptionEmbedPaginator,FieldPagePaginator,TextPaginator 
 import asyncio 
 from utils.config import serverLink, invite_link, website_link, support_link 
+from utils.Tools import get_total_commands, getConfig, blacklist_check, ignore_check
 from utils.Tools import *
 from discord import ui
 from utils.logger import logger
@@ -30,7 +31,7 @@ class HelpLayout(ui.LayoutView):
         self.server_prefix = server_prefix or getattr(ctx, 'prefix', '!')
 
         self.filtered_mapping = self.create_Yuna_mapping()
-        self.total_commands = sum(len(cmds) for cmds in self.filtered_mapping.values())
+        self.total_commands = get_total_commands(ctx.bot)
 
         self.filtered_mapping = self.create_Yuna_mapping()
 
@@ -44,13 +45,17 @@ class HelpLayout(ui.LayoutView):
     def create_Yuna_mapping(self):
         """Create a filtered mapping that only includes cogs from cogs/Yuna directories"""
         main_menu_classes = {
-            'General', 'Voice', 'Welcome', 'AdvancedTicketSystem', 'StickyNotes'
+            'General', 'Voice', 'Welcomer', 'AdvancedTicketSystem', 'Sticky'
         }
 
         extra_menu_classes = {
-            'Automod', 'AntiNuke', 'Extra', 'Fun', 'Moderation', 'Giveaway',
-            'Leveling', 'AI', 'Guild', 'Roleplay', 'Verification',
-            'TrackingCog', 'Logging', 'Counting', 'Backup', 'Crew', 'Ignore'
+            'Automod', 'Antinuke', 'Extra', 'Fun', 'Moderation', 'Giveaway',
+            'Leveling', 'AI', 'GuildProfile', 'Roleplay', 'Verification',
+            'TrackingCog', 'Logging', 'Counting', 'Backup', 'Crew', 'Ignore',
+            'Invcrole', 'Customrole', 'Embed', 'Media', 'Steal', 'Timer',
+            'Whitelist', 'Unwhitelist', 'Extraowner', 'Slots', 'Stats',
+            'NoPrefix', 'FilterCog', 'Global', 'VanityRoles', 'TodoList',
+            'GoogleLens', 'GoogleSearch', 'ProfilePictures', 'Crypto'
         }
 
         all_allowed_classes = main_menu_classes | extra_menu_classes
@@ -78,7 +83,7 @@ class HelpLayout(ui.LayoutView):
             display_prefix = f"@{self.ctx.me.display_name} "
 
         self.container.add_item(
-            ui.TextDisplay("# 4w7h Help Menu")
+            ui.TextDisplay("# acp.xz Help Menu")
         )
 
         self.container.add_item(
@@ -93,7 +98,7 @@ class HelpLayout(ui.LayoutView):
 
         new_content = (
             f"<a:ButterflyWhite:1479361913812025386> Hey [{self.ctx.author.display_name}]({self.ctx.author.avatar.url if self.ctx.author.avatar else 'https://discord.com'})!\n"
-            f"I'm **4w7h**, your friendly companion.\n\n"
+            f"I'm **acp.xz**, your friendly companion.\n\n"
             f"   <:arrow:1479361920254345391> Prefix for this server: **{self.server_prefix}**\n"
             f"   <:arrow:1479361920254345391> Pick from the menu to continue!"
         )
@@ -175,6 +180,11 @@ class HelpLayout(ui.LayoutView):
                         label="Crypto",
                         value="crypto",
                         description="Check cryptocurrency prices"
+                    ),
+                    discord.SelectOption(
+                        label="Music",
+                        value="music",
+                        description="Professional music player for your server"
                     )
                 ]
             )
@@ -283,6 +293,8 @@ class HelpLayout(ui.LayoutView):
             await self.show_guildprofile_content(interaction)
         elif choice == "crypto":
             await self.show_crypto_content(interaction)
+        elif choice == "music":
+            await self.show_music_content(interaction)
         else:
             await interaction.response.send_message("Category not found.", ephemeral=True)
 
@@ -1046,6 +1058,30 @@ class HelpLayout(ui.LayoutView):
             if not interaction.response.is_done():
                 try:
                     await interaction.response.send_message("An error occurred while loading crypto content.", ephemeral=True)
+                except:
+                    pass
+
+    async def show_music_content(self, interaction: discord.Interaction):
+        """Show the music category content"""
+        try:
+            self.container.clear_items()
+            self.container.add_item(ui.TextDisplay("# Music Commands"))
+            self.container.add_item(ui.Separator())
+            commands_text = "`play`, `back`, `skip`, `stop`, `queue`, `nowplaying`, `volume`, `autoplay`, `lyrics`, `favadd`, `favlist`, `seek`, `forward`, `remove`, `move`, `clear`, `filter`"
+            self.container.add_item(ui.TextDisplay(commands_text))
+            self.container.add_item(ui.Separator())
+            self.container.add_item(self.main_categories_select)
+            self.container.add_item(self.extra_categories_select)
+
+            if not interaction.response.is_done():
+                await interaction.response.edit_message(view=self)
+            else:
+                await interaction.edit_original_response(view=self)
+        except Exception as e:
+            logger.error("HELP", f"Error in show_music_content: {e}")
+            if not interaction.response.is_done():
+                try:
+                    await interaction.response.send_message("An error occurred while loading music content.", ephemeral=True)
                 except:
                     pass
 

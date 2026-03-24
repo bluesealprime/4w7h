@@ -426,10 +426,9 @@ class Counting (commands.Cog ):
     @commands.Cog.listener ()
     async def on_message (self,message ):
         """Enhanced message listener with webhook functionality"""
-        if message.author.bot:
+        if message.author.bot or not message.guild:
             return 
-
-        guild_id =message.guild.id 
+        guild_id = message.guild.id
         counting_data =await self.get_counting_data (guild_id )
         settings =await self.get_guild_settings (guild_id )
 

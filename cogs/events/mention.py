@@ -4,9 +4,9 @@ import discord
 
 from discord.ext import commands 
 
-from utils.Tools import get_ignore_data 
-
 import aiosqlite 
+from utils.Tools import get_ignore_data, get_total_commands
+from discord import ui
 
 class Mention (commands.Cog ):
 
@@ -16,7 +16,7 @@ class Mention (commands.Cog ):
 
         self.color =0x000000 
 
-        self.bot_name ="4w7h"
+        self.bot_name ="acp.xz"
         self.bot.loop.create_task (self.setup_database ())
 
     async def setup_database (self ):
@@ -89,26 +89,14 @@ class Mention (commands.Cog ):
 
         if self.bot.user in message.mentions:
             if len (message.content.strip ().split ())==1:
-
-                from discord import ui
-
                 view = ui.LayoutView()
                 container = ui.Container(accent_color=None)
 
-                allowed_cogs = {
-                    'General', 'Voice', 'Welcome', 'AdvancedTicketSystem', 'StickyNotes',
-                    'Automod', 'AntiNuke', 'Extra', 'Fun', 'Moderation', 'Giveaway',
-                    'Leveling', 'AI', 'Guild', 'Roleplay', 'Verification',
-                    'TrackingCog', 'Logging', 'Counting', 'Backup', 'Crew', 'Ignore'
-                }
-                total_commands = 0
-                for cog in self.bot.cogs.values():
-                    if cog.__class__.__name__ in allowed_cogs and hasattr(cog, 'help_custom'):
-                        total_commands += len(cog.get_commands())
+                total_commands = get_total_commands(self.bot)
                 
                 content = (
-                    f"### 👋 Hey [{message.author.display_name}](https://discord.com/users/{message.author.id})!\n"
-                    f"I'm **4w7h**, your intelligent and friendly companion.\n"
+                    f"###  Hey [{message.author.display_name}](https://discord.com/users/{message.author.id})!\n"
+                    f"I'm **acp.xz**, your intelligent and friendly companion.\n"
                     f"> - **Server Prefix:** `{prefix}`\n"
                     f"> - **Total Commands:** `{total_commands}`\n"
                     f"> - **Developer:** [gt4realz_](https://discord.com/users/783953632974471178)\n"
@@ -117,6 +105,45 @@ class Mention (commands.Cog ):
                 container.add_item(ui.TextDisplay(content))
                 view.add_item(container)
                 await message.channel.send (view=view)
+        
+        # New Tag Notification Feature
+        if not message.author.bot and message.guild:
+            # Avoid duplicate notifications for same user in one message
+            unique_mentions = set(message.mentions)
+            for member in unique_mentions:
+                if member.bot or member.id == message.author.id:
+                    continue
+                
+                try:
+                    view = ui.LayoutView()
+                    container = ui.Container(accent_color=None)
+                    
+                    container.add_item(ui.TextDisplay(f"### Tagged in : {message.guild.name}"))
+                    container.add_item(ui.Separator())
+                    
+                    notification_text = (
+                        f"### Notification\n"
+                        f"You were tagged in **{message.guild.name}**!\n\n"
+                        f"**Tagged by :** {message.author.mention}\n\n"
+                        f"**Channel :** {message.channel.mention}\n"
+                        f"**Message :**\n"
+                        f"> {message.content[:1000] if message.content else '*No message content*'}"
+                    )
+                    
+                    author_avatar = message.author.avatar.url if message.author.avatar else message.author.default_avatar.url
+                    container.add_item(ui.Section(
+                        ui.TextDisplay(notification_text),
+                        accessory=ui.Thumbnail(author_avatar)
+                    ))
+                    
+                    view.add_item(container)
+                    await member.send(view=view)
+                except discord.Forbidden:
+                    pass
+                except Exception as e:
+                    # Log other errors but don't crash
+                    from utils.logger import logger
+                    logger.error("MENTION", f"Failed to send tag DM to {member}: {e}")
 """
 : ! Aegis !
     + Discord: itsfizys

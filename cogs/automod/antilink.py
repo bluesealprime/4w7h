@@ -99,6 +99,8 @@ class AntiLink (commands.Cog ):
             return 
 
         guild =message.guild 
+        if not guild:
+            return 
         user =message.author 
         channel =message.channel 
         guild_id =guild.id 

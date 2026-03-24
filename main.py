@@ -11,6 +11,7 @@ import aiosqlite
 from typing import Optional, Any
 from datetime import datetime, timezone, timedelta
 from discord.ext import commands
+from aiohttp import web
 
 # Force Python to find local modules correctly
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -74,8 +75,11 @@ def utc_to_ist(dt: datetime) -> datetime:
 class TicketBot(Yuna):
     def __init__(self):
         super().__init__()
-        # Using Any to suppress "NoneType" squiggles in IDEs like VSCode/Pylance
         self.db: Any = None 
+        self.web_app: Any = None
+
+    async def handle_health(self, request):
+        return web.Response(text="Bot is ALIVE and kicking!")
 
     async def setup_hook(self):
         """Initial startup operations and database sync"""
@@ -102,7 +106,7 @@ class TicketBot(Yuna):
                         ping_role_id INTEGER,
                         embed_title TEXT DEFAULT 'Create a Ticket',
                         embed_description TEXT DEFAULT 'Need assistance? Select a category below to create a ticket!',
-                        embed_footer TEXT DEFAULT 'Powered by 4w7h',
+                        embed_footer TEXT DEFAULT 'Powered by acp.xz',
                         embed_image_url TEXT,
                         embed_color INTEGER DEFAULT 16711680,
                         panel_type TEXT DEFAULT 'dropdown'
@@ -141,6 +145,19 @@ class TicketBot(Yuna):
         except Exception as load_err:
             logger.error("INIT", f"Extension loading error: {load_err}")
             raise 
+
+        # Start Web Server for Render
+        try:
+            app = web.Application()
+            app.router.add_get("/", self.handle_health)
+            runner = web.AppRunner(app)
+            await runner.setup()
+            port = int(os.environ.get("PORT", "8080"))
+            site = web.TCPSite(runner, '0.0.0.0', port)
+            await site.start()
+            logger.success("WEB", f"Health check server running on port {port}")
+        except Exception as e:
+            logger.error("WEB", f"Failed to start web server: {e}")
 
         # Global command tree sync
         logger.info("INIT", "Syncing application commands with Discord...")
@@ -241,6 +258,19 @@ async def check_perms(ctx):
     perms = ctx.me.guild_permissions
     msg = f"**Administrator:** {perms.administrator}\n**Manage Channels:** {perms.manage_channels}\n**Connect:** {perms.connect}"
     await ctx.reply_v2(msg, title="BOT PERMISSIONS")
+
+@bot.command()
+async def join_test(ctx):
+    if not ctx.author.voice:
+        return await ctx.send("Join a VC!")
+    logger.info("TEST", f"Standard join attempt to {ctx.author.voice.channel.name}")
+    try:
+        vc = await ctx.author.voice.channel.connect(timeout=10.0)
+        await ctx.send("Successfully joined!")
+        await vc.disconnect()
+    except Exception as e:
+        logger.error("TEST", f"Standard join failed: {e}")
+        await ctx.send(f"Standard join failed: {e}")
 
 @bot.event 
 async def on_command_completion(ctx: commands.Context):

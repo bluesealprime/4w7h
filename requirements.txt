@@ -24,3 +24,5 @@ python-dateutil
 tenacity
 httpx
 typing-extensions
+lavalink
+davey

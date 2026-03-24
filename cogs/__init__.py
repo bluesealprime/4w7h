@@ -62,6 +62,7 @@ from.commands.googlesearch import GoogleSearch
 from.commands.pfps import ProfilePictures 
 from.commands.guildprofile import GuildProfile
 from.commands.crypto import Crypto
+from.music.cog import Music
 
 
 
@@ -237,6 +238,7 @@ async def setup (bot:Yuna ):
     (ProfilePictures,"ProfilePictures"),
     (GuildProfile,"GuildProfile"),
     (Crypto,"Crypto"),
+    (Music,"Music"),
 
     *YUNA_MODULES,
     (AutoBlacklist,"AutoBlacklist"),
