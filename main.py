@@ -87,6 +87,19 @@ class TicketBot(Yuna):
 
     async def setup_hook(self):
         """Initial startup operations and database sync"""
+        # Start Web Server for Render as early as possible
+        try:
+            app = web.Application()
+            app.router.add_get("/", self.handle_health)
+            runner = web.AppRunner(app)
+            await runner.setup()
+            port = int(os.environ.get("PORT", "8080"))
+            site = web.TCPSite(runner, '0.0.0.0', port)
+            await site.start()
+            logger.success("WEB", f"Health check server running on port {port}")
+        except Exception as e:
+            logger.error("WEB", f"Failed to start web server: {e}")
+
         logger.info("INIT", "Starting database synchronization...")
         try:
             # Sync global prefixes (utils/Tools.py)
@@ -149,19 +162,6 @@ class TicketBot(Yuna):
         except Exception as load_err:
             logger.error("INIT", f"Extension loading error: {load_err}")
             raise 
-
-        # Start Web Server for Render
-        try:
-            app = web.Application()
-            app.router.add_get("/", self.handle_health)
-            runner = web.AppRunner(app)
-            await runner.setup()
-            port = int(os.environ.get("PORT", "8080"))
-            site = web.TCPSite(runner, '0.0.0.0', port)
-            await site.start()
-            logger.success("WEB", f"Health check server running on port {port}")
-        except Exception as e:
-            logger.error("WEB", f"Failed to start web server: {e}")
 
         # Global command tree sync
         logger.info("INIT", "Syncing application commands with Discord...")
