@@ -25,7 +25,7 @@ class PersonalityModal (discord.ui.Modal,title ="Set Your AI Personality"):
         self.ai_cog =ai_cog 
 
 
-        default_prompt ="""You are Yuna, an intelligent and caring Discord bot assistant created by solcodez and hiro.null! 💕
+        default_prompt ="""You are AcpXZ, an intelligent and caring Discord bot assistant created by solcodez and hiro.null! 💕
 
 CORE PERSONALITY:
 - Intelligent, helpful, and genuinely caring about users
@@ -73,7 +73,7 @@ Ready to have meaningful conversations and help with anything you need! 💖"""
 
         self.personality_input =discord.ui.TextInput (
         label ="Your AI Personality",
-        placeholder ="Describe how you want Yuna to respond to you...",
+        placeholder ="Describe how you want AcpXZ to respond to you...",
         default =display_text,
         style =discord.TextStyle.paragraph,
         max_length =2000,
@@ -416,7 +416,7 @@ class AI (commands.Cog ):
 
                 system_context.append ({
                 "role":"system",
-                "content":f"""You are Yuna, an intelligent Discord bot created by solcodez and hiro.null.
+                "content":f"""You are AcpXZ, an intelligent Discord bot created by solcodez and hiro.null.
 
 You have a caring, helpful personality and can remember conversations with users.You have many features including moderation, entertainment, music, games, AI capabilities, and utilities.
 

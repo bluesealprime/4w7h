@@ -15,7 +15,7 @@ from typing import *
 from utils import*
 from utils.config import BotName,serverLink
 from utils import Paginator,DescriptionEmbedPaginator,FieldPagePaginator,TextPaginator
-from core import Cog,Yuna,Context
+from core import Cog,AcpXZ,Context
 from typing import Optional
 import aiosqlite
 import asyncio
@@ -1907,7 +1907,7 @@ class Extra (commands.Cog ):
     
     loading_view = discord.ui.LayoutView()
     loading_container = discord.ui.Container(
-        discord.ui.TextDisplay("<a:Yuna_loading:1373173756113195081> Calculating signal strength..."),
+        discord.ui.TextDisplay("<a:AcpXZ_loading:1373173756113195081> Calculating signal strength..."),
         accent_color=None
     )
     loading_view.add_item(loading_container)

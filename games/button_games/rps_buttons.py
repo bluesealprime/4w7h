@@ -163,7 +163,7 @@ class BetaRockPaperScissors (RockPaperScissors ):
         if ctx.author ==self.player2:
             view =discord.ui.LayoutView ()
             container =discord.ui.Container (accent_color =None )
-            container.add_item (discord.ui.TextDisplay ("<:Yuna_notify:1227866804630720565> **Access Denied**\nYou cannot play against yourself!"))
+            container.add_item (discord.ui.TextDisplay ("<:AcpXZ_notify:1227866804630720565> **Access Denied**\nYou cannot play against yourself!"))
             view.add_item (container )
             return await ctx.reply (view =view )
 

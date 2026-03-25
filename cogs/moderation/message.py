@@ -403,7 +403,7 @@ class Message (commands.Cog ):
   async def clear (self,ctx,choice:Union [discord.Member,int ]=None,amount:int =None ):
         if choice is None:
             loading_container = ui.Container(
-                ui.TextDisplay("<a:Yuna_loading:1373173756113195081> Loading purge interface..."),
+                ui.TextDisplay("<a:AcpXZ_loading:1373173756113195081> Loading purge interface..."),
                 accent_color=None
             )
             loading_view = ui.LayoutView()

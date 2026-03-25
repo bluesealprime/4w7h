@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Load local libraries cautiously for better IDE support
 try:
-    from core import Context, Yuna
+    from core import Context, AcpXZ
     from utils.Tools import setup_db, updateAllGuildsPrefixFromEnv
     from utils.config import OWNER_IDS, DEV_IDS
     from utils.logger import logger
@@ -76,7 +76,7 @@ def utc_to_ist(dt: datetime) -> datetime:
 # ---------------------------------------------------------
 # Bot Definition (Rebranded To Support Team)
 # ---------------------------------------------------------
-class TicketBot(Yuna):
+class TicketBot(AcpXZ):
     def __init__(self):
         super().__init__()
         self.db: Any = None 

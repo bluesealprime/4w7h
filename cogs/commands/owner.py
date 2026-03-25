@@ -12,7 +12,7 @@ from typing import Optional
 from utils import Paginator,DescriptionEmbedPaginator,FieldPagePaginator,TextPaginator 
 from utils.Tools import *
 from utils.config import OWNER_IDS 
-from core import Cog,Yuna,Context 
+from core import Cog,AcpXZ,Context 
 import sqlite3 
 import os 
 import requests 
@@ -235,7 +235,7 @@ class Owner (commands.Cog ):
         paginator =Paginator (source =DescriptionEmbedPaginator (
         entries =entries,
         description ="",
-        title =f"Guild List of Yuna-bot [{len(self.client.guilds)}]",
+        title =f"Guild List of AcpXZ-bot [{len(self.client.guilds)}]",
         color =0x000000,
         per_page =10 ),
         ctx =ctx )
@@ -298,7 +298,7 @@ class Owner (commands.Cog ):
     @commands.command (name ="S.reboot",help ="Restarts the client.")
     @commands.is_owner ()
     async def _restart (self,ctx:Context ):
-        await ctx.reply ("Rebooting Yuna...")
+        await ctx.reply ("Rebooting AcpXZ...")
         restart_program ()
 
     @commands.command (name ="sync",help ="Syncs all database.")
@@ -334,7 +334,7 @@ class Owner (commands.Cog ):
 
 
         embed =discord.Embed (
-        title ="🌸 Yuna Update Time 🌸",
+        title ="🌸 AcpXZ Update Time 🌸",
         description =message,
         color =0x00d4ff,
         timestamp =discord.utils.utcnow ()
@@ -429,7 +429,7 @@ class Owner (commands.Cog ):
         ]
         paginator =Paginator (source =DescriptionEmbedPaginator (
         entries =entries,
-        title =f"Yuna Owners [{len(nplist)}]",
+        title =f"AcpXZ Owners [{len(nplist)}]",
         description ="",
         per_page =10,
         color =0x000000 ),
@@ -879,7 +879,7 @@ class Badges (commands.Cog ):
     @commands.cooldown (1,3,commands.BucketType.user )
     async def badges (self,ctx,member:discord.Member =None ):
 
-        processing_message =await ctx.send ("<a:Yuna_loading:1372527554761855038> Loading your profile...")
+        processing_message =await ctx.send ("<a:AcpXZ_loading:1372527554761855038> Loading your profile...")
 
         member =member or ctx.author 
         user_id =member.id 

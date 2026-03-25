@@ -4,13 +4,13 @@ import aiosqlite
 import asyncio 
 import logging 
 from discord.ext import commands 
-from core import Yuna,Cog 
+from core import AcpXZ,Cog 
 
 DATABASE_PATH ='db/autorole.db'
 logger =logging.getLogger (__name__ )
 
 class Autorole2 (Cog ):
-    def __init__ (self,bot:Yuna ):
+    def __init__ (self,bot:AcpXZ ):
         self.bot =bot 
         self.headers ={"Authorization":f"Bot {self.bot.http.token}"}
         self.bot.loop.create_task (self.setup_database ())
@@ -64,14 +64,14 @@ class Autorole2 (Cog ):
                 role =member.guild.get_role (role_id )
                 if role:
                     try:
-                        await member.add_roles (role,reason ="Yuna Autoroles")
+                        await member.add_roles (role,reason ="AcpXZ Autoroles")
                     except discord.Forbidden:
                         logger.warn(f"Bot lacks permissions to add role {role.name} in {member.guild.name} during Autorole Event.")
                     except discord.errors.RateLimited as e:
                         logger.warn(f"Rate limit encountered: {e}.Retrying in {e.retry_after} seconds.")
                         await asyncio.sleep (e.retry_after )
                         try:
-                            await member.add_roles (role,reason ="Yuna Autoroles")
+                            await member.add_roles (role,reason ="AcpXZ Autoroles")
                         except Exception:
                             pass
                     except discord.HTTPException as e:
@@ -81,7 +81,7 @@ class Autorole2 (Cog ):
                             logger.warn(f"(Autorole) Rate limit encountered.Retrying after {retry_after} seconds.")
                             await asyncio.sleep (retry_after )
                             try:
-                                await member.add_roles (role,reason ="Yuna Autoroles")
+                                await member.add_roles (role,reason ="AcpXZ Autoroles")
                             except Exception:
                                 pass
                         else:

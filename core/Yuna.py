@@ -24,7 +24,7 @@ extensions:List [str ]=[
 "cogs"
 ]
 
-class Yuna (commands.Bot ):
+class AcpXZ (commands.Bot ):
 
     def __init__ (self,*arg,**kwargs ):
         intents =discord.Intents.all ()
@@ -172,5 +172,5 @@ class Yuna (commands.Bot ):
 
 def setup_bot ():
     intents =discord.Intents.all ()
-    bot =Yuna (intents =intents )
+    bot =AcpXZ (intents =intents )
     return bot

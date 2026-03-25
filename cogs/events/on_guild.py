@@ -1,5 +1,5 @@
 from discord.ext import commands 
-from core import Yuna,Cog 
+from core import AcpXZ,Cog 
 from utils.Tools import getConfig 
 import discord 
 import logging 
@@ -11,10 +11,10 @@ format ="\x1b[38;5;197m[\x1b[0m%(asctime)s\x1b[38;5;197m]\x1b[0m -> \x1b[38;5;19
 datefmt ="%H:%M:%S",
 )
 
-client =Yuna ()
+client =AcpXZ ()
 
 class Guild (Cog ):
-    def __init__ (self,client:Yuna ):
+    def __init__ (self,client:AcpXZ ):
         self.client =client 
 
     @client.event 

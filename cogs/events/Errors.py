@@ -7,7 +7,7 @@ import aiohttp
 from datetime import datetime, timezone, timedelta
 from discord.ext import commands 
 from utils.Tools import get_ignore_data 
-from core import Yuna,Cog,Context 
+from core import AcpXZ,Cog,Context 
 from utils.logger import logger as custom_logger
 
 
@@ -71,7 +71,7 @@ for handler in commands_logger.handlers:
     handler.addFilter (CheckFailureFilter ())
 
 class Errors (Cog ):
-    def __init__ (self,client:Yuna ):
+    def __init__ (self,client:AcpXZ ):
         self.client =client 
         self._error_cache =set ()
         self._processing_errors =set ()

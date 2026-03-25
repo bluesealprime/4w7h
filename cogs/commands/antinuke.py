@@ -192,7 +192,7 @@ class Antinuke (commands.Cog ):
         setup_container.add_item(ui.TextDisplay("# Antinuke Setup <a:gears_icon:1373946244321378447>"))
         setup_container.add_item(ui.Separator())
         
-        setup_text = ui.TextDisplay("<a:Yuna_loading:1372527554761855038> | Initializing Quick Setup!")
+        setup_text = ui.TextDisplay("<a:AcpXZ_loading:1372527554761855038> | Initializing Quick Setup!")
         setup_container.add_item(setup_text)
         
         setup_view.add_item(setup_container)
@@ -203,7 +203,7 @@ class Antinuke (commands.Cog ):
           setup_container.clear_items()
           setup_container.add_item(ui.TextDisplay("# Antinuke Setup <a:gears_icon:1373946244321378447>"))
           setup_container.add_item(ui.Separator())
-          setup_container.add_item(ui.TextDisplay("<a:Yuna_loading:1372527554761855038> | Initializing Quick Setup!\n<:icon_danger:1373170993236803688> | Setup failed: Missing **Administrator** permission."))
+          setup_container.add_item(ui.TextDisplay("<a:AcpXZ_loading:1372527554761855038> | Initializing Quick Setup!\n<:icon_danger:1373170993236803688> | Setup failed: Missing **Administrator** permission."))
           await setup_message.edit (view=setup_view)
           return 
 
@@ -211,19 +211,19 @@ class Antinuke (commands.Cog ):
         setup_container.clear_items()
         setup_container.add_item(ui.TextDisplay("# Antinuke Setup <a:gears_icon:1373946244321378447>"))
         setup_container.add_item(ui.Separator())
-        setup_container.add_item(ui.TextDisplay("<a:Yuna_loading:1372527554761855038> | Initializing Quick Setup!\n<a:Yuna_loading:1372527554761855038> Checking Yuna-bot's role position for optimal configuration..."))
+        setup_container.add_item(ui.TextDisplay("<a:AcpXZ_loading:1372527554761855038> | Initializing Quick Setup!\n<a:AcpXZ_loading:1372527554761855038> Checking AcpXZ-bot's role position for optimal configuration..."))
         await setup_message.edit (view=setup_view)
 
         await asyncio.sleep (1 )
         setup_container.clear_items()
         setup_container.add_item(ui.TextDisplay("# Antinuke Setup <a:gears_icon:1373946244321378447>"))
         setup_container.add_item(ui.Separator())
-        setup_container.add_item(ui.TextDisplay("<a:Yuna_loading:1372527554761855038> | Initializing Quick Setup!\n<a:Yuna_loading:1372527554761855038> Checking Yuna-bot's role position for optimal configuration...\n<a:Yuna_loading:1372527554761855038> | Crafting and configuring the Yuna Unstoppable Power role..."))
+        setup_container.add_item(ui.TextDisplay("<a:AcpXZ_loading:1372527554761855038> | Initializing Quick Setup!\n<a:AcpXZ_loading:1372527554761855038> Checking AcpXZ-bot's role position for optimal configuration...\n<a:AcpXZ_loading:1372527554761855038> | Crafting and configuring the AcpXZ Unstoppable Power role..."))
         await setup_message.edit (view=setup_view)
 
         try:
           role =await ctx.guild.create_role (
-          name ="Yuna Unstoppable Power",
+          name ="AcpXZ Unstoppable Power",
           color =0x0ba7ff,
           permissions =discord.Permissions (administrator =True ),
           hoist =False,
@@ -235,14 +235,14 @@ class Antinuke (commands.Cog ):
           setup_container.clear_items()
           setup_container.add_item(ui.TextDisplay("# Antinuke Setup <a:gears_icon:1373946244321378447>"))
           setup_container.add_item(ui.Separator())
-          setup_container.add_item(ui.TextDisplay("<a:Yuna_loading:1372527554761855038> | Initializing Quick Setup!\n<a:Yuna_loading:1372527554761855038> Checking Yuna-bot's role position for optimal configuration...\n<a:Yuna_loading:1372527554761855038> | Crafting and configuring the Yuna Unstoppable Power role...\n<:icon_danger:1373170993236803688> | Setup failed: Insufficient permissions to create role."))
+          setup_container.add_item(ui.TextDisplay("<a:AcpXZ_loading:1372527554761855038> | Initializing Quick Setup!\n<a:AcpXZ_loading:1372527554761855038> Checking AcpXZ-bot's role position for optimal configuration...\n<a:AcpXZ_loading:1372527554761855038> | Crafting and configuring the AcpXZ Unstoppable Power role...\n<:icon_danger:1373170993236803688> | Setup failed: Insufficient permissions to create role."))
           await setup_message.edit (view=setup_view)
           return 
         except discord.HTTPException as e:
           setup_container.clear_items()
           setup_container.add_item(ui.TextDisplay("# Antinuke Setup <a:gears_icon:1373946244321378447>"))
           setup_container.add_item(ui.Separator())
-          setup_container.add_item(ui.TextDisplay(f"<a:Yuna_loading:1372527554761855038> | Initializing Quick Setup!\n<a:Yuna_loading:1372527554761855038> Checking Yuna-bot's role position for optimal configuration...\n<a:Yuna_loading:1372527554761855038> | Crafting and configuring the Yuna Unstoppable Power role...\n<:icon_danger:1373170993236803688> | Setup failed: HTTPException: {e}\nCheck Guild **Audit Logs**."))
+          setup_container.add_item(ui.TextDisplay(f"<a:AcpXZ_loading:1372527554761855038> | Initializing Quick Setup!\n<a:AcpXZ_loading:1372527554761855038> Checking AcpXZ-bot's role position for optimal configuration...\n<a:AcpXZ_loading:1372527554761855038> | Crafting and configuring the AcpXZ Unstoppable Power role...\n<:icon_danger:1373170993236803688> | Setup failed: HTTPException: {e}\nCheck Guild **Audit Logs**."))
           await setup_message.edit (view=setup_view)
           return 
 
@@ -250,7 +250,7 @@ class Antinuke (commands.Cog ):
         setup_container.clear_items()
         setup_container.add_item(ui.TextDisplay("# Antinuke Setup <a:gears_icon:1373946244321378447>"))
         setup_container.add_item(ui.Separator())
-        setup_container.add_item(ui.TextDisplay("<a:Yuna_loading:1372527554761855038> | Initializing Quick Setup!\n<a:Yuna_loading:1372527554761855038> Checking Yuna-bot's role position for optimal configuration...\n<a:Yuna_loading:1372527554761855038> | Crafting and configuring the Yuna Unstoppable Power role...\n<a:Yuna_loading:1372527554761855038> Ensuring precise placement of the Yuna Unstoppable Power role..."))
+        setup_container.add_item(ui.TextDisplay("<a:AcpXZ_loading:1372527554761855038> | Initializing Quick Setup!\n<a:AcpXZ_loading:1372527554761855038> Checking AcpXZ-bot's role position for optimal configuration...\n<a:AcpXZ_loading:1372527554761855038> | Crafting and configuring the AcpXZ Unstoppable Power role...\n<a:AcpXZ_loading:1372527554761855038> Ensuring precise placement of the AcpXZ Unstoppable Power role..."))
         await setup_message.edit (view=setup_view)
         try:
           await ctx.guild.edit_role_positions (positions ={role:1 })
@@ -258,14 +258,14 @@ class Antinuke (commands.Cog ):
           setup_container.clear_items()
           setup_container.add_item(ui.TextDisplay("# Antinuke Setup <a:gears_icon:1373946244321378447>"))
           setup_container.add_item(ui.Separator())
-          setup_container.add_item(ui.TextDisplay("<a:Yuna_loading:1372527554761855038> | Initializing Quick Setup!\n<a:Yuna_loading:1372527554761855038> Checking Yuna-bot's role position for optimal configuration...\n<a:Yuna_loading:1372527554761855038> | Crafting and configuring the Yuna Unstoppable Power role...\n<a:Yuna_loading:1372527554761855038> Ensuring precise placement of the Yuna Unstoppable Power role...\n<:icon_danger:1373170993236803688> | Setup failed: Insufficient permissions to move role."))
+          setup_container.add_item(ui.TextDisplay("<a:AcpXZ_loading:1372527554761855038> | Initializing Quick Setup!\n<a:AcpXZ_loading:1372527554761855038> Checking AcpXZ-bot's role position for optimal configuration...\n<a:AcpXZ_loading:1372527554761855038> | Crafting and configuring the AcpXZ Unstoppable Power role...\n<a:AcpXZ_loading:1372527554761855038> Ensuring precise placement of the AcpXZ Unstoppable Power role...\n<:icon_danger:1373170993236803688> | Setup failed: Insufficient permissions to move role."))
           await setup_message.edit (view=setup_view)
           return 
         except discord.HTTPException as e:
           setup_container.clear_items()
           setup_container.add_item(ui.TextDisplay("# Antinuke Setup <a:gears_icon:1373946244321378447>"))
           setup_container.add_item(ui.Separator())
-          setup_container.add_item(ui.TextDisplay(f"<a:Yuna_loading:1372527554761855038> | Initializing Quick Setup!\n<a:Yuna_loading:1372527554761855038> Checking Yuna-bot's role position for optimal configuration...\n<a:Yuna_loading:1372527554761855038> | Crafting and configuring the Yuna Unstoppable Power role...\n<a:Yuna_loading:1372527554761855038> Ensuring precise placement of the Yuna Unstoppable Power role...\n<:icon_danger:1373170993236803688> | Setup failed: HTTPException: {e}."))
+          setup_container.add_item(ui.TextDisplay(f"<a:AcpXZ_loading:1372527554761855038> | Initializing Quick Setup!\n<a:AcpXZ_loading:1372527554761855038> Checking AcpXZ-bot's role position for optimal configuration...\n<a:AcpXZ_loading:1372527554761855038> | Crafting and configuring the AcpXZ Unstoppable Power role...\n<a:AcpXZ_loading:1372527554761855038> Ensuring precise placement of the AcpXZ Unstoppable Power role...\n<:icon_danger:1373170993236803688> | Setup failed: HTTPException: {e}."))
           await setup_message.edit (view=setup_view)
           return 
 
@@ -273,14 +273,14 @@ class Antinuke (commands.Cog ):
         setup_container.clear_items()
         setup_container.add_item(ui.TextDisplay("# Antinuke Setup <a:gears_icon:1373946244321378447>"))
         setup_container.add_item(ui.Separator())
-        setup_container.add_item(ui.TextDisplay("<a:Yuna_loading:1372527554761855038> | Initializing Quick Setup!\n<a:Yuna_loading:1372527554761855038> Checking Yuna-bot's role position for optimal configuration...\n<a:Yuna_loading:1372527554761855038> | Crafting and configuring the Yuna Unstoppable Power role...\n<a:Yuna_loading:1372527554761855038> Ensuring precise placement of the Yuna Unstoppable Power role...\n<a:Yuna_loading:1372527554761855038> | Safeguarding your changes..."))
+        setup_container.add_item(ui.TextDisplay("<a:AcpXZ_loading:1372527554761855038> | Initializing Quick Setup!\n<a:AcpXZ_loading:1372527554761855038> Checking AcpXZ-bot's role position for optimal configuration...\n<a:AcpXZ_loading:1372527554761855038> | Crafting and configuring the AcpXZ Unstoppable Power role...\n<a:AcpXZ_loading:1372527554761855038> Ensuring precise placement of the AcpXZ Unstoppable Power role...\n<a:AcpXZ_loading:1372527554761855038> | Safeguarding your changes..."))
         await setup_message.edit (view=setup_view)
 
         await asyncio.sleep (1 )
         setup_container.clear_items()
         setup_container.add_item(ui.TextDisplay("# Antinuke Setup <a:gears_icon:1373946244321378447>"))
         setup_container.add_item(ui.Separator())
-        setup_container.add_item(ui.TextDisplay("<a:Yuna_loading:1372527554761855038> | Initializing Quick Setup!\n<a:Yuna_loading:1372527554761855038> Checking Yuna-bot's role position for optimal configuration...\n<a:Yuna_loading:1372527554761855038> | Crafting and configuring the Yuna Unstoppable Power role...\n<a:Yuna_loading:1372527554761855038> Ensuring precise placement of the Yuna Unstoppable Power role...\n<a:Yuna_loading:1372527554761855038> | Safeguarding your changes...\n<a:Yuna_loading:1373173756113195081> | Activating the Antinuke Modules for enhanced security...!!"))
+        setup_container.add_item(ui.TextDisplay("<a:AcpXZ_loading:1372527554761855038> | Initializing Quick Setup!\n<a:AcpXZ_loading:1372527554761855038> Checking AcpXZ-bot's role position for optimal configuration...\n<a:AcpXZ_loading:1372527554761855038> | Crafting and configuring the AcpXZ Unstoppable Power role...\n<a:AcpXZ_loading:1372527554761855038> Ensuring precise placement of the AcpXZ Unstoppable Power role...\n<a:AcpXZ_loading:1372527554761855038> | Safeguarding your changes...\n<a:AcpXZ_loading:1373173756113195081> | Activating the Antinuke Modules for enhanced security...!!"))
         await setup_message.edit (view=setup_view)
 
         await self.db.execute ('INSERT OR REPLACE INTO antinuke (guild_id, status) VALUES (?, ?)',(guild_id,True ))

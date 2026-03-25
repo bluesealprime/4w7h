@@ -155,7 +155,7 @@ class Stats(commands.Cog):
     @commands.cooldown(1, 7, commands.BucketType.user)
     async def stats(self, ctx):
         loading_container = ui.Container(
-            ui.TextDisplay("<a:Yuna_loading:1373173756113195081> Loading acp.xz's information..."),
+            ui.TextDisplay("<a:AcpXZ_loading:1373173756113195081> Loading acp.xz's information..."),
             accent_color=None
         )
         loading_view = ui.LayoutView()

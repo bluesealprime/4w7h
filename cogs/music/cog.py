@@ -38,9 +38,10 @@ url_rx = re.compile(r'https?://(?:www\.)?.+')
 
 class LavalinkVoiceClient(discord.VoiceProtocol):
     def __init__(self, client: discord.Client, channel: discord.abc.Connectable):
+        super().__init__(client, channel)
         self.client = client
+        self.bot = client
         self.channel = channel
-        self.guild = channel.guild
         self._lavalink = client.lavalink
 
     async def on_voice_server_update(self, data):
@@ -109,8 +110,25 @@ class Music(Cog):
 
     async def on_track_end(self, event):
         player = event.player
-        if not player.queue and player.fetch('autoplay_enabled'):
-            await self.handle_autoplay(player)
+        if not player.queue:
+            if player.fetch('autoplay_enabled'):
+                await self.handle_autoplay(player)
+            else:
+                # Return to 24/7 VC if enabled
+                try:
+                    async with aiosqlite.connect("db/vc247.db") as db:
+                        async with db.execute("SELECT channel_id FROM vc247 WHERE guild_id = ?", (player.guild_id,)) as cursor:
+                            row = await cursor.fetchone()
+                            if row:
+                                home_channel_id = row[0]
+                                if int(player.channel_id) != home_channel_id:
+                                    guild = self.bot.get_guild(player.guild_id)
+                                    home_channel = guild.get_channel(home_channel_id)
+                                    if home_channel:
+                                        await guild.change_voice_state(channel=home_channel, self_deaf=True)
+                                        logger.info("MUSIC", f"Returning to 24/7 VC in {guild.name}")
+                except Exception as e:
+                    logger.error("MUSIC", f"Error returning to 24/7 VC: {e}")
 
     async def handle_autoplay(self, player):
         last_track = getattr(player, 'current', None)
@@ -202,14 +220,21 @@ class Music(Cog):
     async def play(self, ctx: Context, *, query: str):
         """Play music in your voice channel"""
         if not ctx.author.voice: return await ctx.reply_v2("Join a voice channel first!", title="VOICE REQUIRED")
+        
         player = self.lavalink.player_manager.get(ctx.guild.id) or self.lavalink.player_manager.create(ctx.guild.id)
-        if not ctx.voice_client:
+        
+        # Connect or move if not in the same channel
+        if not ctx.voice_client or ctx.voice_client.channel.id != ctx.author.voice.channel.id:
             await ctx.author.voice.channel.connect(cls=LavalinkVoiceClient, self_deaf=True)
-            player.store('text_channel_id', ctx.channel.id)
+            
+        # Always update text channel for controls
+        player.store('text_channel_id', ctx.channel.id)
+        
         query = query.strip('<>')
         if not url_rx.match(query): query = f'ytsearch:{query}'
         results = await self.lavalink.get_tracks(query)
         if not results or not results.tracks: return await ctx.reply_v2("Nothing found!", title="ERROR")
+        
         track = results.tracks[0]
         player.add(requester=ctx.author.id, track=track)
         await ctx.reply_v2(f"Added **{track.title}** to queue.", title="TRACK ADDED")

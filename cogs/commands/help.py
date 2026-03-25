@@ -4,7 +4,7 @@ from discord import app_commands,Interaction
 from difflib import get_close_matches 
 from contextlib import suppress 
 from core import Context 
-from core.Yuna import Yuna 
+from core.Yuna import AcpXZ 
 from core.Cog import Cog 
 from utils.Tools import getConfig 
 from itertools import chain 
@@ -30,10 +30,10 @@ class HelpLayout(ui.LayoutView):
         self.current_page = "main"
         self.server_prefix = server_prefix or getattr(ctx, 'prefix', '!')
 
-        self.filtered_mapping = self.create_Yuna_mapping()
+        self.filtered_mapping = self.create_AcpXZ_mapping()
         self.total_commands = get_total_commands(ctx.bot)
 
-        self.filtered_mapping = self.create_Yuna_mapping()
+        self.filtered_mapping = self.create_AcpXZ_mapping()
 
         self.container = ui.Container(accent_color=None)
 
@@ -42,8 +42,8 @@ class HelpLayout(ui.LayoutView):
 
         self.add_item(self.container)
 
-    def create_Yuna_mapping(self):
-        """Create a filtered mapping that only includes cogs from cogs/Yuna directories"""
+    def create_AcpXZ_mapping(self):
+        """Create a filtered mapping that only includes cogs from cogs/AcpXZ directories"""
         main_menu_classes = {
             'General', 'Voice', 'Welcomer', 'AdvancedTicketSystem', 'Sticky'
         }
@@ -59,15 +59,15 @@ class HelpLayout(ui.LayoutView):
         }
 
         all_allowed_classes = main_menu_classes | extra_menu_classes
-        Yuna_mapping = {}
+        AcpXZ_mapping = {}
 
         for cog in self.ctx.bot.cogs.values():
             if cog and hasattr(cog, '__class__'):
                 cog_class_name = cog.__class__.__name__
                 if cog_class_name in all_allowed_classes and hasattr(cog, 'help_custom'):
-                    Yuna_mapping[cog] = cog.get_commands()
+                    AcpXZ_mapping[cog] = cog.get_commands()
 
-        return Yuna_mapping
+        return AcpXZ_mapping
 
     def create_select_options(self, menu_type):
         """No select options - empty"""
@@ -1260,9 +1260,9 @@ class HelpCommand (commands.HelpCommand ):
   def command_not_found (self,string:str )->str:
     return f"No command called `{string}` found."
 
-  def create_Yuna_mapping (self,mapping ):
-    """Create a filtered mapping that only includes cogs from cogs/Yuna directories"""
-    Yuna_mapping ={}
+  def create_AcpXZ_mapping (self,mapping ):
+    """Create a filtered mapping that only includes cogs from cogs/AcpXZ directories"""
+    AcpXZ_mapping ={}
 
 
     allowed_cog_classes ={
@@ -1279,9 +1279,9 @@ class HelpCommand (commands.HelpCommand ):
         cog_class_name =cog.__class__.__name__ 
 
         if cog_class_name in allowed_cog_classes and hasattr (cog,'help_custom'):
-          Yuna_mapping [cog ]=commands 
+          AcpXZ_mapping [cog ]=commands 
 
-    return Yuna_mapping 
+    return AcpXZ_mapping 
 
   async def send_bot_help (self,mapping ):
     ctx =self.context 
@@ -1493,7 +1493,7 @@ class HelpCommand (commands.HelpCommand ):
 
 class Help (Cog,name ="help"):
 
-  def __init__ (self,client:Yuna ):
+  def __init__ (self,client:AcpXZ ):
     self.bot =client 
     self._original_help_command =client.help_command 
     attributes ={

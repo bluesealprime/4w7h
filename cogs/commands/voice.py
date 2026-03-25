@@ -9,6 +9,10 @@ from typing import Optional,Union
 from core import Context 
 from utils import Paginator,DescriptionEmbedPaginator,FieldPagePaginator,TextPaginator 
 from utils import *
+try:
+    from cogs.music.cog import LavalinkVoiceClient
+except ImportError:
+    LavalinkVoiceClient = None
 
 
 class Voice (commands.Cog ):
@@ -40,7 +44,10 @@ class Voice (commands.Cog ):
                             if channel and isinstance(channel, discord.VoiceChannel):
                                 try:
                                     if not guild.voice_client:
-                                        await channel.connect()
+                                        if LavalinkVoiceClient:
+                                            await channel.connect(cls=LavalinkVoiceClient, self_deaf=True)
+                                        else:
+                                            await channel.connect(self_deaf=True)
                                 except Exception as e:
                                     print(f"Failed to connect to 24/7 VC in {guild.name}: {e}")
         except Exception as e:
@@ -61,7 +68,10 @@ class Voice (commands.Cog ):
                         channel = member.guild.get_channel(channel_id)
                         if channel and isinstance(channel, discord.VoiceChannel):
                             try:
-                                await channel.connect()
+                                if LavalinkVoiceClient:
+                                    await channel.connect(cls=LavalinkVoiceClient, self_deaf=True)
+                                else:
+                                    await channel.connect(self_deaf=True)
                             except:
                                 pass
 
@@ -519,11 +529,18 @@ class Voice (commands.Cog ):
         loading_msg = await ctx.reply_v2(f"Enabling 24/7 mode in {channel.mention}...", title="Wait a moment")
         
         try:
-            # Connect bot to channel if not already there
+            # Connect bot to channel if not already there or move if in different channel
             if not ctx.voice_client:
-                await channel.connect()
+                if LavalinkVoiceClient:
+                    await channel.connect(cls=LavalinkVoiceClient, self_deaf=True)
+                else:
+                    await channel.connect(self_deaf=True)
             elif ctx.voice_client.channel != channel:
-                await ctx.voice_client.move_to(channel)
+                if LavalinkVoiceClient:
+                    # LavalinkVoiceClient handles moves via connect too, or we can use move_to
+                    await ctx.voice_client.move_to(channel)
+                else:
+                    await ctx.voice_client.move_to(channel)
             
             # Save to DB
             async with aiosqlite.connect(self.db_path) as db:

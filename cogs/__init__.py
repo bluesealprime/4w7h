@@ -1,5 +1,5 @@
 from __future__ import annotations 
-from core import Yuna 
+from core import AcpXZ 
 from colorama import Fore,Style,init 
 from utils.logger import logger
 import asyncio 
@@ -81,30 +81,30 @@ from.events.stickymessage import StickyMessageListener
 
 
 try:
-    from.Yuna.main_menu.general import _general
-    from.Yuna.main_menu.voice import _voice
-    from.Yuna.main_menu.games import _games
-    from.Yuna.main_menu.welcome import _welcome
-    from.Yuna.main_menu.stickymessage import __sticky
-    from.Yuna.main_menu.ticket import ticket
+    from.AcpXZ.main_menu.general import _general
+    from.AcpXZ.main_menu.voice import _voice
+    from.AcpXZ.main_menu.games import _games
+    from.AcpXZ.main_menu.welcome import _welcome
+    from.AcpXZ.main_menu.stickymessage import __sticky
+    from.AcpXZ.main_menu.ticket import ticket
 
-    from.Yuna.extra_menu.antinuke import _antinuke
-    from.Yuna.extra_menu.automod import _automod
-    from.Yuna.extra_menu.leveling import _leveling
-    from.Yuna.extra_menu.extra import _extra
-    from.Yuna.extra_menu.fun import _fun
-    from.Yuna.extra_menu.ai import _ai
-    from.Yuna.extra_menu.giveaway import _giveaway
-    from.Yuna.extra_menu.moderation import _moderation
-    from.Yuna.extra_menu.server import _server
-    from.Yuna.extra_menu.roleplay import RoleplayHelp
-    from.Yuna.extra_menu.verification import VerificationHelp
-    from.Yuna.extra_menu.tracking import _tracking
-    from.Yuna.extra_menu.logging import _logging
-    from.Yuna.extra_menu.counting import _counting
-    from.Yuna.extra_menu.backup import _Backup
-    from.Yuna.extra_menu.crew import _crew
-    from.Yuna.extra_menu.ignore import _ignore
+    from.AcpXZ.extra_menu.antinuke import _antinuke
+    from.AcpXZ.extra_menu.automod import _automod
+    from.AcpXZ.extra_menu.leveling import _leveling
+    from.AcpXZ.extra_menu.extra import _extra
+    from.AcpXZ.extra_menu.fun import _fun
+    from.AcpXZ.extra_menu.ai import _ai
+    from.AcpXZ.extra_menu.giveaway import _giveaway
+    from.AcpXZ.extra_menu.moderation import _moderation
+    from.AcpXZ.extra_menu.server import _server
+    from.AcpXZ.extra_menu.roleplay import RoleplayHelp
+    from.AcpXZ.extra_menu.verification import VerificationHelp
+    from.AcpXZ.extra_menu.tracking import _tracking
+    from.AcpXZ.extra_menu.logging import _logging
+    from.AcpXZ.extra_menu.counting import _counting
+    from.AcpXZ.extra_menu.backup import _Backup
+    from.AcpXZ.extra_menu.crew import _crew
+    from.AcpXZ.extra_menu.ignore import _ignore
     
     YUNA_MODULES = [
         (_general, "_general"),
@@ -185,7 +185,7 @@ from.moderation.snipe import Snipe
 
 
 
-async def setup (bot:Yuna ):
+async def setup (bot:AcpXZ ):
 
     cogs_to_load =[
     (Help,"Help"),

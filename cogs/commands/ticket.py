@@ -477,7 +477,7 @@ class AdvancedTicketSystem (commands.Cog ):
     def create_branded_embed (self,title:str,description:str =None,color:int =0x000000 )->discord.Embed:
         """Create a consistently branded embed"""
         embed =discord.Embed (title =title,description =description,color =color )
-        embed.set_author (name ="Yuna Ticket System",icon_url =self.bot.user.avatar.url if self.bot.user.avatar else None )
+        embed.set_author (name ="AcpXZ Ticket System",icon_url =self.bot.user.avatar.url if self.bot.user.avatar else None )
         embed.set_footer (text ="Developed By Support Team",icon_url =self.bot.user.avatar.url if self.bot.user.avatar else None )
         embed.timestamp =datetime.datetime.utcnow ()
         return embed 
@@ -527,7 +527,7 @@ class AdvancedTicketSystem (commands.Cog ):
                 )
                 embed.set_thumbnail (url =creator.display_avatar.url )
                 embed.set_footer (
-                text ="Thanks for using Yuna ❤️",
+                text ="Thanks for using AcpXZ ❤️",
                 icon_url =self.bot.user.avatar.url if self.bot.user.avatar else None 
                 )
                 embed.timestamp =datetime.datetime.utcnow ()
@@ -561,7 +561,7 @@ class AdvancedTicketSystem (commands.Cog ):
 
                 embed.set_thumbnail (url =claimer.display_avatar.url )
                 embed.set_footer (
-                text ="Thanks for using Yuna ❤️",
+                text ="Thanks for using AcpXZ ❤️",
                 icon_url =self.bot.user.avatar.url if self.bot.user.avatar else None 
                 )
                 embed.timestamp =datetime.datetime.utcnow ()
@@ -593,7 +593,7 @@ class AdvancedTicketSystem (commands.Cog ):
                 )
                 embed.set_thumbnail (url =self.bot.user.avatar.url if self.bot.user.avatar else None )
                 embed.set_footer (
-                text ="Thanks for using Yuna ❤️",
+                text ="Thanks for using AcpXZ ❤️",
                 icon_url =self.bot.user.avatar.url if self.bot.user.avatar else None 
                 )
                 embed.timestamp =datetime.datetime.utcnow ()
@@ -657,7 +657,7 @@ class AdvancedTicketSystem (commands.Cog ):
                     )
 
                 embed.set_footer (
-                text ="Thanks for using Yuna ❤️",
+                text ="Thanks for using AcpXZ ❤️",
                 icon_url =self.bot.user.avatar.url if self.bot.user.avatar else None 
                 )
                 embed.timestamp =datetime.datetime.utcnow ()
@@ -1307,7 +1307,7 @@ class AdvancedTicketSystem (commands.Cog ):
             if guild and guild.icon:
                 embed.set_thumbnail (url =guild.icon.url )
 
-            embed.set_footer (text ="Thanks for using Yuna ❤️")
+            embed.set_footer (text ="Thanks for using AcpXZ ❤️")
 
 
             view =RatingSelectView (ticket_info,transcript )
